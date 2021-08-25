@@ -69,14 +69,7 @@ void General :: firstregister()
     cout<<"\n\n\n\n\t\t\tSet Your Username : ";
     cin>>username;
     cout<<"\n\n\t\t\tSet Your Password : ";
-    char ch;
-    ch = _getch();
-        while (ch != 13)
-        {
-            password.push_back(ch);
-            cout << '*';
-            ch = _getch();
-        }
+    cin>>password;
     
 
         ofstream myfile("frs.txt", ios :: app | ios :: out);
