@@ -321,7 +321,9 @@ void General :: personaldata()
              if(user == username && pass == password)
              {
                   found=1;
-                  if(found==1)
+                  
+             }
+       if(found==1)
         {
                     cout<<"\n\n\n\t\t----------------------INFORMATION-------------------------"; 
           
@@ -381,7 +383,7 @@ void General :: personaldata()
        file1.close();
    }
 
-}
+
 
 
 void General :: display()
