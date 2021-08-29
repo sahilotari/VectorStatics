@@ -1095,11 +1095,7 @@ void General :: seedbsearch()
        file1.close();
    }
 }  
-void General :: update()
-{
-  cout<<"\n\n\n\t\t\tCode";
-  getch();
-}
+
 
 void General :: deletefun()
 {
@@ -1157,6 +1153,66 @@ void General :: deletefun()
                        default :  goto label;
                                   break;
                   }
+
+}
+
+void General::update()
+{
+	system("cls");
+	General obj;
+	int found=0;
+	string role,name,address,contact,email,cropg,cropb,quantity,min_price,seedb,seeds;
+	cout<<"\n\t\t--------------------------UPDATE DATA----------------------------------\n";
+	fstream fin;
+	fin.open("frs.txt",ios::in);
+	ofstream fout;
+	fout.open("temp.txt",ios::out);
+	
+	cout<<"\n\t\t\tEnter email to update record : ";
+	cin>>obj.email;
+	
+	if(!fin){
+		cout<<"\n\t\t\tFile not exist!";
+	}
+	else{
+		fin>>username>>password>>role>>name>>address>>contact>>email>>cropg>>cropb>>seedb>>seeds>>quantity>>min_price;
+		while(!fin.eof()){
+		
+			if(obj.email!=email){
+				fout<<username<<"\t"<<password<<"\t"<<role<<"\t"<<name<<"\t"<<address<<"\t"<<contact<<"\t"<<email<<"\t"<<cropg<<"\t"<<cropb<<"\t"<<seedb<<"\t"<<seeds<<"\t"<<quantity<<"\t"<<min_price<<endl;
+			}
+			else{
+				found=1;
+			}
+            fin>>username>>password>>role>>name>>address>>contact>>email>>cropg>>cropb>>seedb>>seeds>>quantity>>min_price;	
+		}
+	    fout.close();
+	    fin.close();
+	 
+	    remove("frs.txt");
+        rename("temp.txt","frs.txt");
+		if(found==1){
+			cout<<"\n\t\t\tRegister Again to Update Record successfully";
+			label :
+                int a;
+                  cout<<"\n\n\n\t\t\tEnter 1 to go to registeration : ";
+                  cin>>a;
+    
+                  switch(a)
+                  {
+                       case 1 : firstregister();
+                                break;
+                       default :  goto label;
+                                  break;
+                  }
+			getch();
+		}
+		else{
+			cout<<"\n\t\t\tRecord not found...";
+			getch();
+		}
+	}
+	
 
 }
 
