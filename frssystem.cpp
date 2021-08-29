@@ -7,6 +7,7 @@
 #include<windows.h>
 #include<unistd.h>
 #include<stdlib.h>
+#include<cstdio>
 
 using namespace std;
 
@@ -206,7 +207,8 @@ void General :: login()
             exit=1;
        }
        file1>>username>>password>>role>>name>>address>>contact>>email>>cropg>>cropb>>seedb>>seeds>>quantity>>min_price;
-    }      
+    }  
+	file1.close();    
     if(exit==1)
     {
          cout<<"\n\n\n\n\t\t\tYou have logged in successfully!";
@@ -216,7 +218,7 @@ void General :: login()
          int a;
          cout<<"\n\n\n\n\t\t\tEnter 1 to go to the home page : ";
          cin>>a;
-    
+         
          switch(a)
          {
              case 1 : multiplechoice();
@@ -224,12 +226,13 @@ void General :: login()
              default :  goto label;
                         break;
          }
-         file1.close();
+         
     } 
     else
     {
         cout<<"\n\n\n\n\t\t\t   Not registered enter 1";
         cout<<"\n\n\t\t\t   To login again enter 2";
+        
         repeat :
         int n,i;
         cout<<"\n\n\t\t\t\tYour Choice : ";
@@ -243,7 +246,7 @@ void General :: login()
             default : goto repeat;
                       break;
        }
-       file1.close();
+      
     }  
 }
 
@@ -1100,8 +1103,61 @@ void General :: update()
 
 void General :: deletefun()
 {
-  cout<<"\n\n\n\t\t\tCode";
-  getch();
+	system("cls");
+	General obj;
+	int found=0;
+	string role,name,address,contact,email,cropg,cropb,quantity,min_price,seedb,seeds;
+	cout<<"\n\t\t--------------------------DELETE DATA----------------------------------\n";
+	fstream fin;
+	fin.open("frs.txt",ios::in);
+	ofstream fout;
+	fout.open("temp.txt",ios::out);
+	
+	cout<<"\n\t\t\tEnter email to delete record : ";
+	cin>>obj.email;
+	
+	if(!fin){
+		cout<<"\n\t\t\tFile not exist!";
+	}
+	else{
+		fin>>username>>password>>role>>name>>address>>contact>>email>>cropg>>cropb>>seedb>>seeds>>quantity>>min_price;
+		while(!fin.eof()){
+		
+			if(obj.email!=email){
+				fout<<username<<"\t"<<password<<"\t"<<role<<"\t"<<name<<"\t"<<address<<"\t"<<contact<<"\t"<<email<<"\t"<<cropg<<"\t"<<cropb<<"\t"<<seedb<<"\t"<<seeds<<"\t"<<quantity<<"\t"<<min_price<<endl;
+			}
+			else{
+				found=1;
+			}
+            fin>>username>>password>>role>>name>>address>>contact>>email>>cropg>>cropb>>seedb>>seeds>>quantity>>min_price;	
+		}
+	    fout.close();
+	    fin.close();
+	 
+	    remove("frs.txt");
+        rename("temp.txt","frs.txt");
+		if(found==1){
+			cout<<"\n\t\t\tThe Record Deleted successfully";
+			getch();
+		}
+		else{
+			cout<<"\n\t\t\tRecord not found...";
+			getch();
+		}
+	}
+	label :
+                int a;
+                  cout<<"\n\n\n\n\t\t\tEnter 1 to go to the home page : ";
+                  cin>>a;
+    
+                  switch(a)
+                  {
+                       case 1 : multiplechoice();
+                                break;
+                       default :  goto label;
+                                  break;
+                  }
+
 }
 
 
