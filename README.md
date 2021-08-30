@@ -1,7 +1,7 @@
 # VectorStatics
 Team VectorStatic Project on Farmer Management System.
 
-To run this project, Download the source code and run it with C++ compiler.
+To run this project, Download the source code and run it with C++ compiler or you can directly run .exe file.
 Program will further guide you How to use it.
 
 It includes features of registration, login, Display data by role, Search data by name, role, seeds, crops,etc.
